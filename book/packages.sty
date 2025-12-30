@@ -7,7 +7,7 @@
 \setmainlanguage[variant=mono]{greek}
 \PolyglossiaSetup{greek}{indentfirst=false}
 \setotherlanguage[variant=us]{english}
-\setmainfont[Ligatures=TeX]{GFS Neohellenic}
+\setmainfont[Ligatures=TeX]{Noto Serif}
 \setsansfont[Ligatures=TeX]{GFS Elpis}
 
 % hyphenate two languages
@@ -25,7 +25,7 @@
 % default figure size fits line width
 \usepackage{graphicx}
 \usepackage{keyval}
-\setkeys{Gin}{width=\textwidth,height=0.35\textheight,keepaspectratio}
+\setkeys{Gin}{width=0.9\textwidth,height=0.45\textheight,keepaspectratio}
 
 % figure placement 
 \usepackage{float}
@@ -39,14 +39,14 @@
 \makeatother
 
 % captions
-\usepackage[labelformat=empty,font={footnotesize,sf},width=\textwidth,centerlast]{caption}
+\usepackage[labelformat=simple,font={small,it},width=0.9\textwidth]{caption}
 
 % lists
 \makeatletter
 \setlength{\@fptop}{0pt}
 \makeatother
 \usepackage[shortlabels]{enumitem}
-\setlist{noitemsep,font=\sffamily}
+\setlist{itemsep=0.5em,font=\small\sffamily}
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
@@ -59,3 +59,12 @@
 
 % Load last
 \usepackage[bookmarks]{hyperref}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=gray
+}
+

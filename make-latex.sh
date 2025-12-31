@@ -18,4 +18,4 @@ for filename in text/apx*.txt; do
    pandoc --lua-filter=extras.lua "$filename" --to markdown | pandoc --lua-filter=extras.lua --to markdown | pandoc --lua-filter=epigraph.lua --to markdown | pandoc --lua-filter=figure.lua --to markdown | pandoc --metadata-file=meta.yml --filter pandoc-crossref --to markdown | pandoc --top-level-division=chapter --citeproc --bibliography=bibliography/"$(basename "$filename" .txt).bib" --reference-location=section --to latex > latex/"$(basename "$filename" .txt).tex"
 done
 
-sed -i 's+Figure+Εικόνα+g' ./latex/ch0*
+# sed -i 's+Figure+Εικόνα+g' ./latex/ch0*

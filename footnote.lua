@@ -1,18 +1,44 @@
---Add figure title and license text to the figure reference
+-- Add figure title and license text to figure references (Pandoc 3.x compatible)
+
+local stringify = pandoc.utils.stringify
+
 function Note(el)
-  stringify = pandoc.utils.stringify
-  if #el.content == 1 then
-    local ft = stringify(el.content[1]) 
-    if string.sub(ft,1,5) == "@fig:" then
-        local fn = string.sub(ft,6)
-        --print(fn)
-        local f = io.open("figures/" .. fn .. ".md", 'r')
-        local doc = pandoc.read(f:read('*a'))
-        f:close()
-        local title=pandoc.utils.stringify(doc.meta.title) or "Title has not been set"
-        local license_text=pandoc.utils.stringify(doc.meta.license_text) or "License has not been set"
-        return pandoc.Note("@" .. ft .. " " .. title .. " (" .. license_text .. ")")
+  -- only simple footnotes
+  if #el.content ~= 1 then
+    return nil
+  end
+
+  local ft = stringify(el.content[1])
+
+  -- only @fig:... references
+  if not ft:match("^@fig:") then
+    return nil
+  end
+
+  local fn = ft:sub(6)
+  local path = "figures/" .. fn .. ".md"
+
+  local f = io.open(path, "r")
+  if not f then
+    io.stderr:write("footnote.lua: could not open " .. path .. "\n")
+    return nil
+  end
+
+  local content = f:read("*a")
+  f:close()
+
+  local doc = pandoc.read(content, "markdown")
+
+  local title = stringify(doc.meta.title or "")
+  local license_text = stringify(doc.meta.license_text or "")
+
+  local extra = ""
+  if title ~= "" or license_text ~= "" then
+    extra = " " .. title
+    if license_text ~= "" then
+      extra = extra .. " (" .. license_text .. ")"
     end
   end
-end
 
+  return pandoc.Note("Βλ. Εικόνα " .. fn .. extra)
+end

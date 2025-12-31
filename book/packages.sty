@@ -7,8 +7,8 @@
 \setmainlanguage[variant=mono]{greek}
 \PolyglossiaSetup{greek}{indentfirst=false}
 \setotherlanguage[variant=us]{english}
-\setmainfont[Ligatures=TeX]{Noto Serif}
-\setsansfont[Ligatures=TeX]{GFS Elpis}
+\setmainfont[Ligatures=TeX]{Times New Roman}
+\setsansfont[Ligatures=TeX]{Arial}
 
 % hyphenate two languages
 \usepackage[Greek,Latin]{ucharclasses}
@@ -51,14 +51,50 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \usepackage[protrusion=true,final]{microtype}
-\usepackage{hyperref}
+% \usepackage{hyperref}
 
 % Appendix label
+\usepackage[toc,page]{appendix}
 \renewcommand{\appendixtocname}{Παράρτημα}
 \renewcommand{\appendixpagename}{Παράρτημα}
 
 % Load last
 \usepackage[bookmarks]{hyperref}
+
+% pandoc image bounding box
+\usepackage{adjustbox}
+
+\newcommand{\pandocbounded}[1]{%
+  \begin{adjustbox}{max width=\linewidth}
+    #1
+  \end{adjustbox}%
+}
+
+% Pandoc citeproc (CSL) references
+\usepackage{etoolbox}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+
+\newenvironment{CSLReferences}[2]
+ {%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{1.5em}%
+    \setlength{\itemindent}{0pt}%
+    \setlength{\itemsep}{#2\baselineskip}%
+    \setlength{\parsep}{0pt}%
+  }%
+ }
+ {%
+  \end{list}%
+ }
+
+ \newcommand{\citeproctext}{}
 
 % Hyperlinks
 \hypersetup{
@@ -67,4 +103,3 @@
   urlcolor=blue,
   citecolor=gray
 }
-

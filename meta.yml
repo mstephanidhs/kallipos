@@ -1,7 +1,8 @@
 ---
 lang: el-GR
 nocite: '@*'
-fignos-warning-level: 1 
-figPrefix: Εικόνα
-figureTitle: Εικόνα
-...
+
+crossref:
+  fignos-warning-level: 1
+  figPrefix: 'Εικόνα'
+  figureTitle: 'Εικόνα'
